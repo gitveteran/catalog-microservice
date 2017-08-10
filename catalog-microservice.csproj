@@ -24,7 +24,16 @@
     </PackageReference>
     <PackageReference Include="Nancy">
       <Version>2.0.0-clinteastwood</Version>
-    </PackageReference>  
+    </PackageReference>
+    <PackageReference Include="MongoDB.Driver">
+      <Version>2.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Driver.Core">
+      <Version>2.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Bson">
+      <Version>2.4.4</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
