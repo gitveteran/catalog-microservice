@@ -1,0 +1,8 @@
+C:\Users\Hekireky\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.deps.json
+C:\Users\Hekireky\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.runtimeconfig.json
+C:\Users\Hekireky\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.runtimeconfig.dev.json
+C:\Users\Hekireky\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.dll
+C:\Users\Hekireky\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.pdb
+C:\Users\Hekireky\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.AssemblyInfo.cs
+C:\Users\Hekireky\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.dll
+C:\Users\Hekireky\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.pdb
