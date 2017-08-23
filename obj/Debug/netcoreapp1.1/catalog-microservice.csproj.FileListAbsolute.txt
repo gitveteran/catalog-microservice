@@ -6,3 +6,13 @@ C:\Users\Hekireky\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-m
 C:\Users\Hekireky\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.AssemblyInfo.cs
 C:\Users\Hekireky\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.dll
 C:\Users\Hekireky\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.pdb
+C:\Users\Dalius\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.deps.json
+C:\Users\Dalius\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.runtimeconfig.json
+C:\Users\Dalius\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.runtimeconfig.dev.json
+C:\Users\Dalius\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.dll
+C:\Users\Dalius\Desktop\catalog-microservice\bin\Debug\netcoreapp1.1\catalog-microservice.pdb
+C:\Users\Dalius\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.csproj.CoreCompileInputs.cache
+C:\Users\Dalius\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.AssemblyInfoInputs.cache
+C:\Users\Dalius\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.AssemblyInfo.cs
+C:\Users\Dalius\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.dll
+C:\Users\Dalius\Desktop\catalog-microservice\obj\Debug\netcoreapp1.1\catalog-microservice.pdb

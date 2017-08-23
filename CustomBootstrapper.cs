@@ -1,7 +1,7 @@
 using Nancy;
 using Nancy.Configuration;
 
-namespace StockPurchaseMicroservice
+namespace catalog_microservice
 {
     public class CustomBootsrapper : DefaultNancyBootstrapper
     {
