@@ -10,12 +10,15 @@ namespace catalog_microservice.GameCatalog
 
         public GameCatalogModule(IGameCatalog gameCatalog) : base("/gameCatalog")
         {
-            //Get("/{id}/{type}", parameters => { return parameters; });
-            Get("/{id}", parameters =>
+            Get("/fetch/{id}", parameters =>
             {
                 var id = (string) parameters.id;
-                //var gameName = (string)parameters.gameName;
                 return gameCatalog.GetItem(id);
+            });
+            Get("/search/{searchTerm}", parameters => 
+            {
+                var searchTerm = (string) parameters.searchTerm;
+                return gameCatalog.SearchItem(searchTerm);
             });
         }
     }
