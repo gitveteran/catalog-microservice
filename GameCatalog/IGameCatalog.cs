@@ -1,4 +1,3 @@
-using MongoDB.Bson;
 using System.Collections.Generic;
 
 namespace catalog_microservice.GameCatalog

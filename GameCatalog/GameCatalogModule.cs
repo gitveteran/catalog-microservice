@@ -2,12 +2,9 @@ namespace catalog_microservice.GameCatalog
 {
     using System;
     using Nancy;
-    using MongoDB.Bson;
 
     public class GameCatalogModule : NancyModule
     {
-
-
         public GameCatalogModule(IGameCatalog gameCatalog) : base("/gameCatalog")
         {
             Get("/fetch/{id}", parameters =>
