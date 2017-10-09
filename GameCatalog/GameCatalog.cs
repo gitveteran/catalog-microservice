@@ -10,15 +10,9 @@ namespace catalog_microservice.GameCatalog
 {
     class GameCatalog : IGameCatalog
     {
-        //Setup variables,constants for the database
-
-        //TO-DO: dynamically set-up or discover connection to DB
         //TO-DO: de-couple DB set-up logic with a separete Client component
         private IMongoClient _client;
         private IMongoDatabase _database;
-        const string DATABASE = "test";
-        const string COLLECTION = "gameItems";
-        string CONNECTION = Conf.ENV == "Docker" ? "mongodb://172.17.0.2:27017" : "mongodb://localhost:27017";
 
         public GameCatalog()
         {
@@ -37,7 +31,7 @@ namespace catalog_microservice.GameCatalog
         private GameItem fetchGameItem(string id)
         { 
             
-            var collection = _database.GetCollection<BsonDocument>(COLLECTION);
+            var collection = _database.GetCollection<BsonDocument>(Conf.MONGODB_COLLECTION);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             var document = collection.Find(filter).First();
 
@@ -56,7 +50,7 @@ namespace catalog_microservice.GameCatalog
         {
             Console.WriteLine("Searching, " + "searchTerm is: " + searchTerm);
 
-            var collection = _database.GetCollection<BsonDocument>(COLLECTION);
+            var collection = _database.GetCollection<BsonDocument>(Conf.MONGODB_COLLECTION);
             //TO-DO: find out how to optimize this heavy perforamnce regex (should I add figure names in db as additional lower-case)
             var filter = Builders<BsonDocument>.Filter.Regex("name", new BsonRegularExpression(searchTerm,"i"));
             var cursor = collection.Find(filter).ToCursor();
@@ -96,14 +90,18 @@ namespace catalog_microservice.GameCatalog
         }
         private void initializeDB()
         {
-            Console.WriteLine("Operating System is : " + Environment.OSVersion.ToString());
-            
-            Console.WriteLine("Initializing DB...");
+            Console.WriteLine("Operating System is : " + Environment.OSVersion.ToString());          
+            Console.WriteLine("Initializing DB... from " + Conf.ENV + " environment.");
+            Console.WriteLine("Using MONGODB_URI: " + Conf.MONGODB_URI);
+            Console.WriteLine("Using MONGODB_NAME: " + Conf.MONGODB_NAME);
+            Console.WriteLine("Using MONGODB_COLLECTION: " + Conf.MONGODB_COLLECTION);
 
-            _client = new MongoClient(CONNECTION);
-            _database = _client.GetDatabase(DATABASE);
-            bool isDBLive = _database.RunCommandAsync((Command<BsonDocument>)"{ping:1}").Wait(1000);
+            _client = new MongoClient(Conf.MONGODB_URI);
+            _database = _client.GetDatabase(Conf.MONGODB_NAME);       
             
+            Console.WriteLine("Cluster Health: " + _client.Cluster.Description.State);
+
+            bool isDBLive = _database.RunCommandAsync((Command<BsonDocument>)"{ping:1}").Wait(7000);
             if(isDBLive)
             {
                 Console.WriteLine("Finished! DB Initialized");
@@ -111,7 +109,7 @@ namespace catalog_microservice.GameCatalog
             }
             else
             {
-                Console.WriteLine("Error! database not initialized!");
+                Console.WriteLine("Error! database not initialized OR ping did not reach it in time!");
                 //Add logging logic here
                 System.Environment.Exit(1);
             } 

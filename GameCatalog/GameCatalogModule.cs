@@ -10,12 +10,12 @@ namespace catalog_microservice.GameCatalog
             Get("/fetch/{id}", parameters =>
             {
                 var id = (string) parameters.id;
-                return gameCatalog.GetItem(id);
+                return Response.AsJson(gameCatalog.GetItem(id));
             });
             Get("/search/{searchTerm}", parameters => 
             {
                 var searchTerm = (string) parameters.searchTerm;
-                return gameCatalog.SearchItem(searchTerm);
+                return Response.AsJson(gameCatalog.SearchItem(searchTerm));
             });
         }
     }

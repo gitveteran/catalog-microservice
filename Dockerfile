@@ -1,19 +1,5 @@
-FROM microsoft/aspnetcore-build:2.0 AS build-env
-WORKDIR /app
-
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
 FROM microsoft/dotnet:2.0.0-runtime-jessie
-ENV ASPNETCORE_URLS="http://*:5000";
-ENV ASPNETCORE_ENVIRONMENT="Docker"
+ENV ASPNETCORE_ENVIRONMENT="Container"
 WORKDIR /app
-EXPOSE 5000
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "catalog-microservice.dll"]
+COPY . .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet catalog-microservice.dll
