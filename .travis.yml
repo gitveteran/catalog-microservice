@@ -19,15 +19,19 @@ addons:
 env:
   global:
     - DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
 before_script:
   - chmod a+x ./build.sh
   - chmod a+x ./deploy.sh
+
 script:
   - ./build.sh
+
 deploy:
   - provider: script
     script: ./deploy.sh $HEROKU_USERNAME $HEROKU_API_KEY
     skip_cleanup: true
+
 branches:
   only:
     - master
