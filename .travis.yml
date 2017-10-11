@@ -2,7 +2,20 @@ language: csharp
 sudo: required
 dist: trusty
 mono: none
-dotnet: 1.1.2
+dotnet: 2.0.0
+
+services:
+  - docker
+
+addons:
+  apt:
+    sources:
+    - sourceline: 'deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main'
+      key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    packages:
+    - dotnet-hostfxr-1.0.1
+    - dotnet-sharedframework-microsoft.netcore.app-1.0.5
+    
 env:
   global:
     - DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -15,8 +28,6 @@ deploy:
   - provider: script
     script: ./deploy.sh $HEROKU_USERNAME $HEROKU_API_KEY
     skip_cleanup: true
-    on:
-      tags: true
 branches:
   only:
     - master

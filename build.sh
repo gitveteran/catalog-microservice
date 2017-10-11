@@ -2,4 +2,4 @@
 set -ev
 
 dotnet restore
-dotnet build -c Release src
+dotnet build -c Release
