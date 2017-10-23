@@ -7,15 +7,17 @@ namespace catalog_microservice.GameCatalog
     {
         public GameCatalogModule(IGameCatalog gameCatalog) : base("/gameCatalog")
         {
-            Get("/fetch/{id}", parameters =>
+            Get("/fetch/{id}", async parameters =>
             {
-                var id = (string) parameters.id;
-                return Response.AsJson(gameCatalog.GetItem(id));
+                var id = (string)  parameters.id;
+                var response = await Response.AsJson(gameCatalog.GetItem(id));
+                return response;
             });
-            Get("/search/{searchTerm}", parameters => 
+            Get("/search/{searchTerm}", async parameters => 
             {
                 var searchTerm = (string) parameters.searchTerm;
-                return Response.AsJson(gameCatalog.SearchItem(searchTerm));
+                var response = await Response.AsJson(gameCatalog.SearchItem(searchTerm));
+                return response;
             });
         }
     }

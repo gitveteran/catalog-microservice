@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Driver;
-
+using System.Threading.Tasks;
 
 // TO-DO: Replace all the Console.WriteLine statements with some sort of logging.
 
@@ -19,21 +19,20 @@ namespace catalog_microservice.GameCatalog
             initializeDB();
         }
 
-        public GameItem GetItem(string id)
+        public async Task<GameItem> GetItem(string id)
         {
-            return fetchGameItem(id);
+            return await fetchGameItem(id);
         }
-        public List<GameItem> SearchItem(string searchTerm)
+        public async Task<List<GameItem>> SearchItem(string searchTerm)
         {
-            return searchGameItem(searchTerm);   
+            return await searchGameItem(searchTerm);   
         }
 
-        private GameItem fetchGameItem(string id)
+        private async Task<GameItem> fetchGameItem(string id)
         { 
-            
             var collection = _database.GetCollection<BsonDocument>(Conf.MONGODB_COLLECTION);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
-            var document = collection.Find(filter).First();
+            var document = await collection.Find(filter).FirstAsync();
 
             Console.WriteLine(document);
 
@@ -44,16 +43,16 @@ namespace catalog_microservice.GameCatalog
             }
 
             return deserializeResult(document);
-        }
+        } 
 
-        private List<GameItem> searchGameItem(string searchTerm)
+        private async Task<List<GameItem>> searchGameItem(string searchTerm)
         {
             Console.WriteLine("Searching, " + "searchTerm is: " + searchTerm);
 
             var collection = _database.GetCollection<BsonDocument>(Conf.MONGODB_COLLECTION);
             //TO-DO: find out how to optimize this heavy perforamnce regex (should I add figure names in db as additional lower-case)
             var filter = Builders<BsonDocument>.Filter.Regex("name", new BsonRegularExpression(searchTerm,"i"));
-            var cursor = collection.Find(filter).ToCursor();
+            var cursor = await collection.Find(filter).ToCursorAsync();
 
             List<GameItem> results = new List<GameItem>();
 
