@@ -10,13 +10,14 @@ namespace catalog_microservice.GameCatalog
             Get("/fetch/{id}", async parameters =>
             {
                 var id = (string)  parameters.id;
-                var response = await Response.AsJson(gameCatalog.GetItem(id));
+                var response = Response.AsJson( await gameCatalog.GetItem(id));
                 return response;
+                
             });
             Get("/search/{searchTerm}", async parameters => 
             {
                 var searchTerm = (string) parameters.searchTerm;
-                var response = await Response.AsJson(gameCatalog.SearchItem(searchTerm));
+                var response = Response.AsJson( await gameCatalog.SearchItem(searchTerm));
                 return response;
             });
         }

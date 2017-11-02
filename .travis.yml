@@ -3,35 +3,32 @@ sudo: required
 dist: trusty
 mono: none
 dotnet: 2.0.0
-
 services:
-  - docker
-
+- docker
 addons:
   apt:
     sources:
-    - sourceline: 'deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main'
-      key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    - sourceline: deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod
+        trusty main
+      key_url: https://packages.microsoft.com/keys/microsoft.asc
     packages:
     - dotnet-hostfxr-1.0.1
     - dotnet-sharedframework-microsoft.netcore.app-1.0.5
-    
 env:
   global:
-    - DOTNET_CLI_TELEMETRY_OPTOUT: 1
-
+  - DOTNET_CLI_TELEMETRY_OPTOUT: 1
 before_script:
-  - chmod a+x ./build.sh
-  - chmod a+x ./deploy.sh
-
+- chmod a+x ./build.sh
+- chmod a+x ./deploy.sh
 script:
-  - ./build.sh
-
+- "./build.sh"
 deploy:
-  - provider: script
-    script: ./deploy.sh $HEROKU_USERNAME $HEROKU_API_KEY
-    skip_cleanup: true
-
+- provider: script
+  script: "./deploy.sh $HEROKU_USERNAME $HEROKU_API_KEY"
+  skip_cleanup: true
 branches:
   only:
-    - master
+  - master
+notifications:
+  slack:
+    secure: vnIFsux4djQ04W1QwDppA+RVKxR/3N/FXXqldcC55kloToQV8cn4trRHhAi75Fkc4x4laJddfTe2JH1gDHTIXAcCHm6BOM04kdhrI+Ny6rwphBCmAIAez7F9wA/xccYLco6t4MafDcai0pAtKh6DedmBiUDujtZHAX5LNE26xMVboYW9PPOGnpaU2UJ6F7sZkwpHTEBeKMc1zW91cNiV96GAx8lEq0PC4mV6ujQt+Ava5iFD9E17AOSKN2Bt18KdZwykknCf+KaOzQky4kxGU078sTMDk76oC4xyQkG2pgfjlhlTTSKXhwUK/U5K74gWqdq1x6ACtk5nDQoCPcKgR0qqgHoDblDH6QYyajf26FVZFLUKeNoFJexhfZryuQLntb3LI2PvjqK5lTWrNTnG8wpCOh6HIHyXHQ3az6KdyMvyR3u8uMropo0RIaO7X7B91oQIU4fnV76LacBAH8jU1niWSxU4tNAiVWbG+h51OHQqyjJcag2UWMA9GmRyrGuz52AQX0jBF1CHTeSxdpzBw9zt1XZnw6va22l44vPn8GncGFEFbDf8Q4ueRj7iDvqKNzBox1XguhwCRUGoR/pet2ECUWp4vS7iRCcvWd40TX5E2CuiIh6FroJ5Mbi0MYokKUlzjulfJnHHAhd71aGDmTymWM36FFxADJ5YuamXPB0=
