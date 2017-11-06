@@ -17,6 +17,6 @@ public static class Conf
         ENV = config["ASPNETCORE_ENVIRONMENT"] ?? "Development";
         MONGODB_URI = config["MONGODB_URI"] ?? "mongodb://localhost:27017";
         MONGODB_NAME = config["MONGODB_NAME"] ?? "test";
-        MONGODB_COLLECTION = config["MONGODB_COLLECTION"] ?? "gameItems";
+        MONGODB_COLLECTION = config["MONGODB_COLLECTION"] ?? "basicEntities";
     }
 }

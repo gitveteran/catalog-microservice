@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 // TO-DO: Replace all the Console.WriteLine statements with some sort of logging.
 
-namespace catalog_microservice.GameCatalog
+namespace catalog_microservice.BasicEntityCatalog
 {
-    class GameCatalog : IGameCatalog
+    class BasicEntityCatalog : IBasicEntityCatalog
     {
         //TO-DO: de-couple DB set-up logic with a separete Client component
         private IMongoClient _client;
         private IMongoDatabase _database;
 
-        public GameCatalog()
+        public BasicEntityCatalog()
         {
             initializeDB();
         }
 
-        public async Task<GameItem> GetItem(string id)
+        public async Task<BasicEntity> GetBasicEntity(string id)
         {
-            return await fetchGameItem(id);
+            return await basicEntityFetch(id);
         }
-        public async Task<List<GameItem>> SearchItem(string searchTerm)
+        public async Task<List<BasicEntity>> SearchBasicEntity(string searchTerm)
         {
-            return await searchGameItem(searchTerm);   
+            return await basicEntitySearch(searchTerm);   
         }
 
-        private async Task<GameItem> fetchGameItem(string id)
+        private async Task<BasicEntity> basicEntityFetch(string id)
         { 
             var collection = _database.GetCollection<BsonDocument>(Conf.MONGODB_COLLECTION);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
@@ -45,7 +45,7 @@ namespace catalog_microservice.GameCatalog
             return deserializeResult(document);
         } 
 
-        private async Task<List<GameItem>> searchGameItem(string searchTerm)
+        private async Task<List<BasicEntity>> basicEntitySearch(string searchTerm)
         {
             Console.WriteLine("Searching, " + "searchTerm is: " + searchTerm);
 
@@ -54,7 +54,7 @@ namespace catalog_microservice.GameCatalog
             var filter = Builders<BsonDocument>.Filter.Regex("name", new BsonRegularExpression(searchTerm,"i"));
             var cursor = await collection.Find(filter).ToCursorAsync();
 
-            List<GameItem> results = new List<GameItem>();
+            List<BasicEntity> results = new List<BasicEntity>();
 
             //TO-DO: Create Policy/Exception handles
             if(collection.Find(filter).Count() > 0)
@@ -73,9 +73,9 @@ namespace catalog_microservice.GameCatalog
             return results;
         }
 
-        private GameItem deserializeResult(BsonDocument document)
+        private BasicEntity deserializeResult(BsonDocument document)
         {
-            GameItem returnedItem = new GameItem();
+            BasicEntity returnedItem = new BasicEntity();
 
             returnedItem.Id = document.GetValue("_id").ToString();
             document.Remove("_id");
